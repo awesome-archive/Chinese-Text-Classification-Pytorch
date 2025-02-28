@@ -53,7 +53,7 @@ def build_dataset(config, ues_word):
                 seq_len = len(token)
                 if pad_size:
                     if len(token) < pad_size:
-                        token.extend([vocab.get(PAD)] * (pad_size - len(token)))
+                        token.extend([PAD] * (pad_size - len(token)))
                     else:
                         token = token[:pad_size]
                         seq_len = pad_size
@@ -94,7 +94,7 @@ class DatasetIterater(object):
             batches = self._to_tensor(batches)
             return batches
 
-        elif self.index > self.n_batches:
+        elif self.index >= self.n_batches:
             self.index = 0
             raise StopIteration
         else:
